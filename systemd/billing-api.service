@@ -1,0 +1,15 @@
+[Unit]
+Description=billing-api (Flask + gunicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=billing
+WorkingDirectory=/opt/billing-api
+EnvironmentFile=/etc/billing-api/env
+ExecStart=/opt/billing-api/.venv/bin/gunicorn -w 4 -b 0.0.0.0:8080 billing_api.app:app
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
