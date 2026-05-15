@@ -1,0 +1,13 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+tests/
+.pytest_cache
+.mypy_cache
+.ruff_cache
+k8s/
+systemd/
+runbook.md
+README.md
