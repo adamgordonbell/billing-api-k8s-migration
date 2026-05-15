@@ -1,0 +1,16 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: billing-api
+  namespace: payments
+  labels:
+    app.kubernetes.io/name: billing-api
+    app.kubernetes.io/instance: billing-api-prod
+    team: payments
+    env: prod
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: billing-api
+      app.kubernetes.io/instance: billing-api-prod
