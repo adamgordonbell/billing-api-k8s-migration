@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: billing-api
+  namespace: payments
+  labels:
+    app.kubernetes.io/name: billing-api
+    app.kubernetes.io/instance: billing-api-prod
+    team: payments
+    env: prod
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - billing-api.prod.internal
+      secretName: billing-api-tls
+  rules:
+    - host: billing-api.prod.internal
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: billing-api
+                port:
+                  name: http
